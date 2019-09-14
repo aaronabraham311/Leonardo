@@ -1,9 +1,14 @@
-ATTRIBUTE_WEIGHTS = [5, 4, 3, 2, 1]
+import numpy as np
+
+ATTRIBUTE_WEIGHTS = np.array([5, 4, 3, 2, 1])
 
 
 class User:
+
     def __init__(self):
-        self.attribute_values = [1, 2, 3, 4, 5]
+        self.attribute_values = np.array([1, 2, 3, 4, 5])
+        self.norm_attribute_values = None
+        self.establishment_visits = np.array([0.2, 0.1, 0.3, 0.4])
 
     def distance(self, other_user):
-        return sum(ATTRIBUTE_WEIGHTS[i] * ((self.attribute_values[i] - other_user.attribute_values[i]) ** 2) for i in range(len(ATTRIBUTE_WEIGHTS)))
+        return np.sum(ATTRIBUTE_WEIGHTS * np.square(self.norm_attribute_values - other_user.norm_attribute_values))
