@@ -7,7 +7,7 @@ TAGS = ['example_tag']
 
 class User:
 
-    def __init__(self, transactions, establishment_ids):
+    def __init__(self, transactions, establishment_ids, account):
         self.establishment_visits = np.zeros(len(establishment_ids))
         total_expenditure = sum(transaction['amount'] for transaction in transactions)
         expenditure_by_tag = {}
@@ -27,9 +27,11 @@ class User:
                 values_in_order.append(expenditure_by_tag[tag])
             else:
                 values_in_order.append(0.0)
+        normalized_values = [value / total_expenditure for value in values_in_order]
+        income = account['income']
+        self.attribute_values = np.array(normalized_values + [income])
 
         self.establishment_visits /= np.sum(self.establishment_visits)
-        self.attribute_values = np.array(values_in_order) / total_expenditure
         self.norm_attribute_values = None
 
     def distance(self, other_user):

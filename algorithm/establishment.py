@@ -3,10 +3,11 @@ import numpy as np
 
 class Establishment:
 
-    def __init__(self, establishment_id, coords_list, tag):
+    def __init__(self, establishment_id, coords_list, tag, transactions):
         self.establishment_id = establishment_id
         self.coords = np.array(coords_list)
         self.tag = tag
+        self.mean_amount = np.mean([transaction['amount'] for transaction in transactions])
 
     def distance_km(self, other_coords):
         self_lat, self_long = np.deg2rad(self.coords)
