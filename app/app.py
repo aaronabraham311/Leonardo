@@ -1,5 +1,6 @@
 # Libraries
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, jsonify
+import random, json
 
 # Variables
 USER_XCOORDINATE = ""
@@ -22,6 +23,25 @@ app.config['SECRET_KEY'] = "YnJRcS9HWjY+DZoFHtE"
 def index():
     return render_template('index.html', api_key = API_KEY)
 
+# Posts data using jQuery
+@app.route('/reciever', methods = ['POST'])
+def worker():
+    # Data recieved right now is not in correct JSON format
+    #print("python")
+    #print(request.data)
+    
+    if request.is_json:
+        print("Is json")
+    else:
+        print("Not json")
+
+    data = request.get_json()
+    print(data)
+
+    print(data['test'])
+    return jsonify(data)
+
 # Running app in debug mode
 if __name__ == '__main__':
+    app.debug = True
     app.run(debug = True)

@@ -96,6 +96,7 @@
 
         map.addListener('click', function(e) {
           placeMarkerAndPanTo(e.latLng, map);
+          sendToJson(e.latLng.toJSON());
         });
       }
 
@@ -106,9 +107,38 @@
         });
         map.panTo(latLng);
       }
+
+      function sendToJson (coordinates){
+        latitude = coordinates['lat'];
+        longitude = coordinates['lng'];
+        //jsonData = {"lat": String(latitude), "lng": String(longitude)};
+        //console.log(jsonData)
+        jsonData = '{"test": "test"}';
+
+        var url = "http://127.0.0.1:5000/reciever"
+
+        $.ajax({
+          url: url,
+          type: "POST",
+          data: jsonData,
+          contentType: "application/json; charset = utf-8",
+          dataType: "json",
+          success: function() {console.log("Success")}
+        })
+        
+        /*
+        $.post(url, JSON.stringify(jsonData), function(){
+          console.log(JSON.stringify(jsonData));
+          console.log("Posted")
+        }).fail (function() {
+          console.log("function call failed...");
+        }); */
+      }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDySz37lxM4MpNo3tuUEVF7SOk26eDAr-8&callback=initMap">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   </body>
 </html>
