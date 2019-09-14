@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,8 +11,24 @@
 
     <!-- PLEASE CHANGE THIS WHEN WE DECIDE NAME-->
     <title> HTN 2019 Project </title>
-</head>
-<body>
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 75%;
+        width: 75%;
+        margin-left: 12.5%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
     <header class="site-header">
       <nav class="navbar navbar-default">
           <div class="container-fluid">
@@ -22,7 +38,7 @@
           </div>
         </nav>
     </header>
-
+    
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-12">
@@ -44,39 +60,15 @@
 
       <div class = 'col-md-12'>
         <p> Drop a pin in your location! </p>
-
-        <script> 
-          var map;
-          function initialize() {
-            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-            var myOptions = {
-              zoom: 4,
-              center: myLatlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-            google.maps.event.addListener(map, 'click', function(event) {
-            placeMarker(event.latLng);
-            });
-}
-
-function placeMarker(location) {
-  var marker = new google.maps.Marker({
-      position: location, 
-      map: map
-  });
-
-  map.setCenter(location);
-}
-
-        </script>
-           <!-- Put in Google maps and display location. Get the coordinates and send it over to Brendon-->
-        
       </div>
+    </main>
 
+    <div id="map"></div>
+
+    <main role = 'main' class = 'container'>
       <div class = 'col-md-12'>
-        <!-- Number of user recommendations recommendations-->
+
+        <!-- Number of recommendation -->
       </div>
 
       <div class = 'col-md-12'>
@@ -91,16 +83,32 @@ function placeMarker(location) {
 
       <div class = 'col-md-12'>
         <p> Here is a map of our recommendations based on your location. </p>
-         <!-- Call in Google Maps api --> 
+          <!-- Call in Google Maps api --> 
       </div>
     </main>
 
-    <!-- Calling GMaps API-->
-    <script src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap"
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 43.6532, lng: -79.3832}
+        });
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+        map.addListener('click', function(e) {
+          placeMarkerAndPanTo(e.latLng, map);
+        });
+      }
+
+      function placeMarkerAndPanTo(latLng, map) {
+        var marker = new google.maps.Marker({
+          position: latLng,
+          map: map
+        });
+        map.panTo(latLng);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDySz37lxM4MpNo3tuUEVF7SOk26eDAr-8&callback=initMap">
+    </script>
+  </body>
+</html>

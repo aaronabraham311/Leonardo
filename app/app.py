@@ -9,8 +9,8 @@ USER_ID = ""
 API_KEY = "AIzaSyDySz37lxM4MpNo3tuUEVF7SOk26eDAr-8"
 
 # Create Dataset instance from Brendon's code and call function. 
-dataset = Dataset(kevins_data)
-locations = dataset.get_recommendations(dictionary_of_sliders_and_lat_long)
+# dataset = Dataset(kevins_data)
+# locations = dataset.get_recommendations(dictionary_of_sliders_and_lat_long)
 
 # Instantiating app
 app = Flask(__name__)
