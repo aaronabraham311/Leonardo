@@ -111,9 +111,8 @@
       function sendToJson (coordinates){
         latitude = coordinates['lat'];
         longitude = coordinates['lng'];
-        //jsonData = {"lat": String(latitude), "lng": String(longitude)};
-        //console.log(jsonData)
-        jsonData = '{"test": "test"}';
+        jsonData = `{"lat": ${latitude}, "lng": ${longitude}}`;
+        console.log(jsonData)
 
         var url = "http://127.0.0.1:5000/reciever"
 

@@ -26,20 +26,9 @@ def index():
 # Posts data using jQuery
 @app.route('/reciever', methods = ['POST'])
 def worker():
-    # Data recieved right now is not in correct JSON format
-    #print("python")
-    #print(request.data)
-    
-    if request.is_json:
-        print("Is json")
-    else:
-        print("Not json")
-
     data = request.get_json()
-    print(data)
-
-    print(data['test'])
-    return jsonify(data)
+    USER_XCOORDINATE = data['lat']
+    USER_YCOORDINATE = data['lng']
 
 # Running app in debug mode
 if __name__ == '__main__':
