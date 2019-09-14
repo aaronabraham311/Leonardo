@@ -44,12 +44,39 @@
 
       <div class = 'col-md-12'>
         <p> Drop a pin in your location! </p>
+
+        <script> 
+          var map;
+          function initialize() {
+            var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+            var myOptions = {
+              zoom: 4,
+              center: myLatlng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            google.maps.event.addListener(map, 'click', function(event) {
+            placeMarker(event.latLng);
+            });
+}
+
+function placeMarker(location) {
+  var marker = new google.maps.Marker({
+      position: location, 
+      map: map
+  });
+
+  map.setCenter(location);
+}
+
+        </script>
            <!-- Put in Google maps and display location. Get the coordinates and send it over to Brendon-->
-        <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
+        
       </div>
 
       <div class = 'col-md-12'>
-        <!-- NUmber of recommendation -->
+        <!-- Number of user recommendations recommendations-->
       </div>
 
       <div class = 'col-md-12'>
@@ -68,6 +95,8 @@
       </div>
     </main>
 
+    <!-- Calling GMaps API-->
+    <script src="https://maps.googleapis.com/maps/api/js?key={{api_key}}&callback=initMap"
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

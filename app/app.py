@@ -6,7 +6,7 @@ USER_XCOORDINATE = ""
 USER_YCOORDINATE = ""
 USER_ID = ""
 
-API_KEY = ""
+API_KEY = "AIzaSyDySz37lxM4MpNo3tuUEVF7SOk26eDAr-8"
 
 # Create Dataset instance from Brendon's code and call function. 
 dataset = Dataset(kevins_data)
