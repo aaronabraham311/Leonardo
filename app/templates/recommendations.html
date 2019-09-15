@@ -19,6 +19,12 @@
         height: 100%;
         width: 100%;
       }
+
+      .navbar, .jumbotron {
+        background-color: #176139;
+        color: white
+      }
+
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
@@ -32,11 +38,17 @@
       <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="/">HTN 2019 Project</a> <!-- AGAIN, CHANGE THIS NAME-->
+              <a class="navbar-brand" href="/" style = "color: white">HTN 2019 Project</a> <!-- AGAIN, CHANGE THIS NAME-->
             </div>
           </div>
         </nav>
     </header>
+
+    <div class = "container">
+        <h1> Recommendations </h1>
+        <p> Using our custom algorithm, we have recommended the following 5 places for you to shop/dine at. You can also check out the name of the recommended venues by scrolling over each pin.
+        <p>You can always return to the original page by clicking the logo at the top. </p> 
+    </div>
 
     <div id="map"></div>
 

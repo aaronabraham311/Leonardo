@@ -20,11 +20,17 @@
         width: 75%;
         margin-left: 12.5%;
       }
+
+      .navbar, .jumbotron {
+        background-color: #176139;
+        color: white
+      }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        
       }
     </style>
   </head>
@@ -33,7 +39,7 @@
       <nav class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="/">HTN 2019 Project</a> <!-- AGAIN, CHANGE THIS NAME-->
+              <a class="navbar-brand" href="/" style = "color: white">HTN 2019 Project</a> <!-- AGAIN, CHANGE THIS NAME-->
             </div>
           </div>
         </nav>
@@ -73,6 +79,20 @@
 
         <form action = '' method = 'post'>
           {{ form.hidden_tag() }}
+
+          <div class="form-group">
+              {{ form.income.label(class = 'form-control-label') }}
+              {% if form.income.errors %}
+                {{ form.income(class = 'form-control form-control-lg is-invalid') }}
+                <div class = 'invalid-feedback'>
+                  {% for error in form.income.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.income(class = 'form-control form-control-lg') }}
+              {% endif %}
+            </div>
 
           <div class="form-group">
             {{ form.slider_1.label(class = 'form-control-label') }}
@@ -143,15 +163,12 @@
               {{ form.slider_5(class = 'form-control form-control-lg') }}
             {% endif %}
           </div>
-        
-          <p> {{ form.submit(class = 'btn btn-outline-info') }}</p>
+          
+          <div class = 'text-center'>
+              <p> {{ form.submit(class = 'btn btn-outline-info', style = "color: white; background-color: #176139") }}</p>
+          </div>
         </form>
 
-      </div>
-
-      <div class = 'col-md-12'>
-        <p> Here is a map of our recommendations based on your location. </p>
-          <!-- Call in Google Maps api --> 
       </div>
     </main>
 
@@ -192,14 +209,6 @@
           dataType: "json",
           success: function() {console.log("Success")}
         })
-        
-        /*
-        $.post(url, JSON.stringify(jsonData), function(){
-          console.log(JSON.stringify(jsonData));
-          console.log("Posted")
-        }).fail (function() {
-          console.log("function call failed...");
-        }); */
       }
 
     </script>

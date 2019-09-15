@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, NumberRange
 
 # Form to create sliders for spending type
 class sliderForm(FlaskForm):
+    income = IntegerField("Income: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
     slider_1 = IntegerField("Value 1: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
     slider_2 = IntegerField("Value 2: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
     slider_3 = IntegerField("Value 3: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
