@@ -1,6 +1,7 @@
 # Libraries
 from flask import Flask, request, render_template, url_for, redirect, jsonify
 from forms import sliderForm
+from algorithm.dataset import Dataset
 import random, json
 
 # Variables
@@ -30,6 +31,7 @@ app.config['SECRET_KEY'] = "YnJRcS9HWjY+DZoFHtE"
 @app.route('/index', methods = ['GET', 'POST'])
 def index():
     form = sliderForm()
+    dataset = Dataset()
 
     # Getting slider values
     if form.validate_on_submit():
@@ -39,9 +41,11 @@ def index():
         USER_SLIDER_3 = form.slider_3.data
         USER_SLIDER_4 = form.slider_4.data
         USER_SLIDER_5 = form.slider_5.data
-
-        print(INCOME, ', ', USER_SLIDER_1)
+        USER_SLIDER_6 = form.slider_6.data
         
+        recommendations = dataset.get_recommendations([USER_XCOORDINATE, USER_YCOORDINATE],
+        'Food and Dining', [USER_SLIDER_1, USER_SLIDER_2, USER_SLIDER_3, USER_SLIDER_4, USER_SLIDER_5, USER_SLIDER_6], INCOME)
+
         return redirect(url_for('recommendations'))
 
     return render_template('index.html', api_key = API_KEY, form = form)

@@ -7,7 +7,7 @@ from algorithm.user import User
 class Dataset:
 
     def __init__(self):
-        with open('/Users/brendon/stonks_data/customer_profiles.txt') as account_file:
+        with open('/Users/aaronabraham/Desktop/stonks_data/customer_profiles.txt') as account_file:
             accounts = json.load(account_file)['result']['customers']
         accounts_by_user_id = {}
         for account in accounts:
@@ -15,7 +15,7 @@ class Dataset:
             if user_id not in accounts_by_user_id:
                 accounts_by_user_id[user_id] = account
 
-        with open('/Users/brendon/stonks_data/new_customer_transactions.txt') as transaction_file:
+        with open('/Users/aaronabraham/Desktop/stonks_data/new_customer_transactions.txt') as transaction_file:
             transactions_nested = json.load(transaction_file)
         transactions = []
         for subdict in transactions_nested:

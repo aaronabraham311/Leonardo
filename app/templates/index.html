@@ -163,6 +163,20 @@
               {{ form.slider_5(class = 'form-control form-control-lg') }}
             {% endif %}
           </div>
+
+          <div class="form-group">
+              {{ form.slider_6.label(class = 'form-control-label') }}
+              {% if form.slider_6.errors %}
+                {{ form.slider_6(class = 'form-control form-control-lg is-invalid') }}
+                <div class = 'invalid-feedback'>
+                  {% for error in form.slider_6.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.slider_6(class = 'form-control form-control-lg') }}
+              {% endif %}
+            </div>
           
           <div class = 'text-center'>
               <p> {{ form.submit(class = 'btn btn-outline-info', style = "color: white; background-color: #176139") }}</p>

@@ -10,4 +10,5 @@ class sliderForm(FlaskForm):
     slider_3 = IntegerField("Value 3: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
     slider_4 = IntegerField("Value 4: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
     slider_5 = IntegerField("Value 5: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
+    slider_6 = IntegerField("Value 6: ", validators = [DataRequired(), NumberRange(min = 0, max = 100)])
     submit = SubmitField('Submit values')
