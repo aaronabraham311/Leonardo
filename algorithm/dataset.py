@@ -63,7 +63,7 @@ class Dataset:
         self.users = self.users[1:]
 
     def get_recommendations(self, user_coords, tag, sliders, income):
-        sliders = np.array(sliders)
+        sliders = np.array(sliders, dtype=float)
         sliders /= np.sum(sliders)
         self.main_user.attribute_values = np.concatenate([sliders, [income]])
         self.main_user.norm_attribute_values = (self.main_user.attribute_values - self.norm_mean) / self.norm_std_dev

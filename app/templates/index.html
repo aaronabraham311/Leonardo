@@ -95,6 +95,20 @@
             </div>
 
           <div class="form-group">
+              {{ form.tag_select.label(class = 'form-control-label') }}
+              {% if form.tag_select.errors %}
+                {{ form.tag_select(class = 'form-control form-control-lg is-invalid') }}
+                <div class = 'invalid-feedback'>
+                  {% for error in form.tag_select.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.tag_select(class = 'form-control form-control-lg') }}
+              {% endif %}
+            </div>
+
+          <div class="form-group">
             {{ form.slider_1.label(class = 'form-control-label') }}
             {% if form.slider_1.errors %}
               {{ form.slider_1(class = 'form-control form-control-lg is-invalid') }}

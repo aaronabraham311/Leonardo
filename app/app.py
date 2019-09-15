@@ -13,6 +13,8 @@ USER_SLIDER_3 = ""
 USER_SLIDER_4 = ""
 USER_SLIDER_5 = ""
 INCOME = ""
+TAG = ""
+RECOMMENDATIONS = []
 
 API_KEY = "AIzaSyDySz37lxM4MpNo3tuUEVF7SOk26eDAr-8"
 
@@ -33,18 +35,23 @@ def index():
     form = sliderForm()
     dataset = Dataset()
 
+    global USER_XCOORDINATE
+    global USER_YCOORDINATE
+    global RECOMMENDATIONS
+
     # Getting slider values
     if form.validate_on_submit():
         INCOME = form.income.data
+        TAG = form.tag_select.data
         USER_SLIDER_1 = form.slider_1.data
         USER_SLIDER_2 = form.slider_2.data
         USER_SLIDER_3 = form.slider_3.data
         USER_SLIDER_4 = form.slider_4.data
         USER_SLIDER_5 = form.slider_5.data
         USER_SLIDER_6 = form.slider_6.data
-        
-        recommendations = dataset.get_recommendations([USER_XCOORDINATE, USER_YCOORDINATE],
-        'Food and Dining', [USER_SLIDER_1, USER_SLIDER_2, USER_SLIDER_3, USER_SLIDER_4, USER_SLIDER_5, USER_SLIDER_6], INCOME)
+
+        RECOMMENDATIONS = dataset.get_recommendations([USER_XCOORDINATE, USER_YCOORDINATE],
+        TAG, [USER_SLIDER_1, USER_SLIDER_2, USER_SLIDER_3, USER_SLIDER_4, USER_SLIDER_5, USER_SLIDER_6], INCOME)
 
         return redirect(url_for('recommendations'))
 
@@ -55,24 +62,21 @@ def index():
 def parser():
     # Getting coordinates
     data = request.get_json()
+
+    global USER_XCOORDINATE
+    global USER_YCOORDINATE
+
     USER_XCOORDINATE = data['lat']
     USER_YCOORDINATE = data['lng']
 
-    print(USER_XCOORDINATE, ', ', USER_YCOORDINATE)
     return 'Collected marker longitudes and latitudes'
 
 # File to display coordinates of recommendations
 @app.route('/recommendations', methods = ['GET'])
 def recommendations():
-    recommendations = [
-        [43.731548, -79.762421, "Mcdonalds"],
-        [43.740732, -79.734769, "Tim Hortons"],
-        [43.687131, -79.704570, "Res 1"],
-        [43.719893, -79.771146, "Res 2"],
-        [43.667763, -79.775264, "Res2"]
-    ]
-
-    return render_template('recommendations.html', recommendations = recommendations)
+    global RECOMMENDATIONS
+    print(RECOMMENDATIONS)
+    return render_template('recommendations.html', recommendations = RECOMMENDATIONS)
 
 # Running app in debug mode
 if __name__ == '__main__':
