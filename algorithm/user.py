@@ -1,8 +1,8 @@
 import numpy as np
 
-ATTRIBUTE_WEIGHTS = np.array([1])
+ATTRIBUTE_WEIGHTS = np.array([1, 1, 1, 1, 1, 1, 6])
 
-TAGS = ['example_tag']
+TAGS = ['Auto and Transport', 'Entertainment', 'Food and Dining', 'Health and Fitness', 'Home', 'Shopping']
 
 
 class User:
@@ -32,10 +32,10 @@ class User:
                 values_in_order.append(0.0)
         normalized_values = [value / total_expenditure for value in values_in_order]
         try:
-            income = account['totalIncome']
+            self.income = account['totalIncome']
         except KeyError:
-            income = None
-        self.attribute_values = np.array(normalized_values + [income])
+            self.income = None
+        self.attribute_values = np.array(normalized_values + [self.income])
 
         if np.sum(self.establishment_visits) > 0.001:
             self.establishment_visits /= np.sum(self.establishment_visits)

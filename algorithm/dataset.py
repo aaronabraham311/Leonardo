@@ -51,8 +51,8 @@ class Dataset:
         self.users = [User(transactions_by_user[key], self.establishment_ids, accounts_by_user_id[key]) for key in transactions_by_user]
         self.combined_attribute_values = np.stack([user.attribute_values for user in self.users if None not in user.attribute_values])
         self.norm_mean = np.mean(self.combined_attribute_values, axis=0)
-        self.norm_std_dev = np.std(self.combined_attribute_values)
-        if self.norm_std_dev == 0.0:
+        self.norm_std_dev = np.std(self.combined_attribute_values, axis=0)
+        if (self.norm_std_dev == 0.0).any():
             self.norm_std_dev = 1.0
         for user in self.users:
             try:
@@ -62,7 +62,10 @@ class Dataset:
         self.main_user = self.users[0]
         self.users = self.users[1:]
 
-    def get_recommendations(self, user_coords, tag, slider0, slider1, slider2, slider3, slider4):
+    def get_recommendations(self, user_coords, tag, slider0, slider1, slider2, slider3, slider4, slider5):
+        #self.main_user.attribute_values = np.array([slider0, slider1, slider2, slider3, slider4, slider5, 20000])
+        self.main_user.attribute_values[-1] = 20000
+        self.main_user.norm_attribute_values = (self.main_user.attribute_values - self.norm_mean) / self.norm_std_dev
         establishment_visits = self.weighted_establishments(self.main_user)
         for i in range(len(self.establishments)):
             if self.establishments[i].distance_km(user_coords) > 5:
@@ -73,6 +76,7 @@ class Dataset:
         best_establishments = []
         for i in indices[:5]:
             establishment = self.establishments[i]
+            print(establishment.mean_amount)
             best_establishments.append([establishment.coords[0], establishment.coords[1], establishment.name])
         return best_establishments
 
