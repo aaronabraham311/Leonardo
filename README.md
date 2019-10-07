@@ -1,5 +1,7 @@
 # Leonardo
 
+[Link to Devpost](https://devpost.com/software/stonks-6pb8u0)
+
 ## Inspiration
 One of our team members had just started university. Although coursework and the novel social environment were challenging, what he found most difficult was the transition from a life financially dependent on his parents to one more financially independent, especially concerning shopping. While he did ask his friends about the best places to shop, he was concerned that many of their recommendations were not useful for him due to their different spending patterns. Furthermore, he also found it extremely difficult to decide where to spend most of his money as there was no way to experiment with different spending strategies.
 
